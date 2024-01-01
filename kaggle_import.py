@@ -13,7 +13,7 @@ def import_data():
     rows_to_import = 50
     df = pd.read_csv('bestsellers with categories.csv', nrows=rows_to_import)
 
-    # Оновлення даного рядка для введення book_id
+    # Введення book_id вручну
     df['book_id'] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
                      21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
                      41, 42, 43, 44, 45, 46, 47, 48, 49, 50]
@@ -26,12 +26,10 @@ def clear_tables():
     connection = psycopg2.connect(**db_params)
     cursor = connection.cursor()
 
-    # Видалення даних з таблиць book_genre та book_author перед book
     cursor.execute("DELETE FROM book_genre;")
     cursor.execute("DELETE FROM book_author;")
 
     cursor.execute("DELETE FROM book;")
-    # Додайте додаткові оператори DELETE для інших таблиць, якщо потрібно
 
     connection.commit()
 
